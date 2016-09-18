@@ -84,6 +84,8 @@
 
 (require 'powerline-evil)
 (powerline-evil-center-color-theme)
+(setq powerline-default-separator 'wave)
+
 ;(powerline-evil-vim-theme)
 ;(powerline-evil-vim-color-theme)
 ;(powerline-center-theme)
@@ -99,3 +101,5 @@
 (autopair-global-mode)
 
 (add-to-list 'default-frame-alist '(font . "Monaco-12"))
+
+(setq ns-pop-up-frames nil)
