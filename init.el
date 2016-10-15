@@ -24,6 +24,7 @@
 	  (lambda ()
 	    (org-bullets-mode t)))
 (setq org-hide-leading-stars t)
+;; (setq org-ellipsis "⤵")
 
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'color-theme-sanityinc-solarized-dark)
@@ -103,3 +104,23 @@
 (add-to-list 'default-frame-alist '(font . "Monaco-12"))
 
 (setq ns-pop-up-frames nil)
+
+(defun my:ac-c-header-init()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers))
+
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+(defun my:flymake-google-init()
+  (require 'flymake-google-cpplint)
+  (custom-set-variables
+   '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
+  (flymake-google-cpplint-load))
+
+(add-hook 'c++-mode-hook 'my:flymake-google-init)
+(add-hook 'c-mode-hook 'my:flymake-google-init)
+
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
