@@ -6,6 +6,11 @@
 	     '("marmalade" . "http://marmalade-repo.org/packages"))
 (package-initialize)
 
+(setq initial-frame-alist
+      '((width . 179)
+	(height . 46)
+	))
+
 (require 'evil)
 (evil-mode 1)
 (setq evil-insert-state-cursor 'bar)
