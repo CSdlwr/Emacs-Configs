@@ -1,9 +1,5 @@
 
 
-;(set-frame-position (selected-frame) 0 0)
-;(set-frame-width (selected-frame) 110)
-;(set-frame-height (selected-frame) 33)
-
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/")
@@ -109,8 +105,8 @@
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers))
 
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (defun my:flymake-google-init()
   (require 'flymake-google-cpplint)
@@ -118,9 +114,15 @@
    '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
   (flymake-google-cpplint-load))
 
-(add-hook 'c++-mode-hook 'my:flymake-google-init)
-(add-hook 'c-mode-hook 'my:flymake-google-init)
+;; (add-hook 'c++-mode-hook 'my:flymake-google-init)
+;; (add-hook 'c-mode-hook 'my:flymake-google-init)
 
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;; (require 'google-c-style)
+;; (add-hook 'c-mode-common-hook 'google-set-c-style)
+;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+
+(add-to-list 'load-path "~/.emacs.d/auto-java-complete")
+(require 'ajc-java-complete-config)
+(add-hook 'java-mode-hook 'ajc-java-complete-mode)
+;; (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
