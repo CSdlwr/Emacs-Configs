@@ -83,6 +83,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
+(setq ido-separator "\n")
 
 (require 'powerline-evil)
 (powerline-evil-center-color-theme)
