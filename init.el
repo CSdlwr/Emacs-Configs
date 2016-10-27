@@ -131,3 +131,18 @@
 (require 'ajc-java-complete-config)
 (add-hook 'java-mode-hook 'ajc-java-complete-mode)
 ;; (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
+
+(defun my:comment-dwim-line (&optional arg)
+  "replacement for the comment-dwin command.
+   if no region is selected and current line is not blank 
+   and the point is not at the end of the line, then comment the current line.
+   replaces default behaviour of comment-dwin, when inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (progn
+	(comment-or-uncomment-region (line-beginning-position) (line-end-position))
+	(next-line))
+    (comment-dwim arg)))
+
+(global-set-key (kbd "s-/") 'my:comment-dwim-line)
