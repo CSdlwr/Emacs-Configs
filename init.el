@@ -16,8 +16,8 @@
 (setq evil-insert-state-cursor 'bar)
 
 ;; turn on soft wrapping mode for org mode
-(add-hook 'org-mode-hook 'org-mode-truncate-lines)
-(defun org-mode-truncate-lines ()
+(add-hook 'org-mode-hook 'my:org-mode-truncate-lines)
+(defun my:org-mode-truncate-lines ()
   (setq truncate-lines nil))
 
 (require 'org-bullets)
@@ -40,7 +40,7 @@
 
 ;;; C-c as general purpose escape key sequence.
 ;;;
-(defun my-esc (prompt)
+(defun my:esc (prompt)
      "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
      (cond
       ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
@@ -146,3 +146,28 @@
     (comment-dwim arg)))
 
 (global-set-key (kbd "s-/") 'my:comment-dwim-line)
+
+
+(defun my:javac-compile-currunt-buffer-file ()
+  "compile current buffer's file using 'javac' command 
+   if it's a java source file(*.java)"
+  (interactive)
+  (if (not (string-suffix-p ".java" (buffer-file-name)))
+      (message "not a java source file!")
+    (progn
+      (save-buffer)
+      (shell-command
+       (concat "javac " (file-name-nondirectory (buffer-file-name))))
+      )))
+  
+(global-set-key (kbd "<f8>") 'my:javac-compile-currunt-buffer-file)
+
+
+(defun my:java-exec-currunt-buffer-file()
+  "exec current buffer's class file using 'java' command"
+  (interactive)
+  (shell-command
+   (concat "java " (substring (file-name-nondirectory (buffer-file-name)) 0 -5))
+   ))
+
+(global-set-key (kbd "<f9>") 'my:java-exec-currunt-buffer-file)
