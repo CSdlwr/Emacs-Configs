@@ -133,7 +133,8 @@
 (add-hook 'java-mode-hook 'ajc-java-complete-mode)
 ;; (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
 
-(defun my:comment-dwim-line (&optional arg)
+
+(defun my:comment-dwim-line(&optional arg)
   "replacement for the comment-dwin command.
    if no region is selected and current line is not blank 
    and the point is not at the end of the line, then comment the current line.
@@ -149,7 +150,7 @@
 (global-set-key (kbd "s-/") 'my:comment-dwim-line)
 
 
-(defun my:javac-compile-currunt-buffer-file ()
+(defun my:javac-compile-currunt-buffer-file()
   "compile current buffer's file using 'javac' command 
    if it's a java source file(*.java)"
   (interactive)
@@ -172,3 +173,20 @@
    ))
 
 (global-set-key (kbd "<f9>") 'my:java-exec-currunt-buffer-file)
+
+
+(global-set-key (kbd "M-p") 'ace-window)
+
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
+(setq aw-dispatch-always t)
+
+(defvar aw-dispatch-alist
+'((?x aw-delete-window " Ace - Delete Window")
+    (?m aw-swap-window " Ace - Swap Window")
+    (?n aw-flip-window)
+    (?v aw-split-window-vert " Ace - Split Vert Window")
+    (?b aw-split-window-horz " Ace - Split Horz Window")
+    (?i delete-other-windows " Ace - Maximize Window")
+    (?o delete-other-windows))
+"List of actions for `aw-dispatch-default'.")
