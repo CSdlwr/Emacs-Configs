@@ -1,15 +1,19 @@
 
 
+(setq user-full-name "luming.lv"
+      user-mail-address "Lv.luming0858@gmail.com")
+
+
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/")
 	     '("marmalade" . "http://marmalade-repo.org/packages"))
 (package-initialize)
 
+
 (setq initial-frame-alist
       '((width . 179)
-	(height . 46)
-	))
+        (height . 46)))
 
 (require 'evil)
 (evil-mode 1)
@@ -22,7 +26,7 @@
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook
-	  (lambda ()
+	  (lambda()
 	    (org-bullets-mode t)))
 (setq org-hide-leading-stars t)
 ;; (setq org-ellipsis "⤵")
@@ -100,8 +104,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (show-paren-mode t)
-(require 'autopair)
-(autopair-global-mode)
+(electric-pair-mode 1)
 
 (add-to-list 'default-frame-alist '(font . "Monaco-12"))
 
@@ -143,8 +146,8 @@
   (comment-normalize-vars)
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
       (progn
-	(comment-or-uncomment-region (line-beginning-position) (line-end-position))
-	(next-line))
+        (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+        (next-line))
     (comment-dwim arg)))
 
 (global-set-key (kbd "s-/") 'my:comment-dwim-line)
@@ -159,8 +162,7 @@
     (progn
       (save-buffer)
       (shell-command
-       (concat "javac " (file-name-nondirectory (buffer-file-name))))
-      )))
+       (concat "javac " (file-name-nondirectory (buffer-file-name)))))))
   
 (global-set-key (kbd "<f8>") 'my:javac-compile-currunt-buffer-file)
 
@@ -169,8 +171,7 @@
   "exec current buffer's class file using 'java' command"
   (interactive)
   (shell-command
-   (concat "java " (substring (file-name-nondirectory (buffer-file-name)) 0 -5))
-   ))
+   (concat "java " (substring (file-name-nondirectory (buffer-file-name)) 0 -5))))
 
 (global-set-key (kbd "<f9>") 'my:java-exec-currunt-buffer-file)
 
@@ -190,3 +191,36 @@
     (?i delete-other-windows " Ace - Maximize Window")
     (?o delete-other-windows))
 "List of actions for `aw-dispatch-default'.")
+
+(setq tab-width 4
+      indent-tabs-mode nil)
+
+(setq make-backup-files nil)
+
+(global-set-key (kbd "s-[") 'text-scale-decrease)
+(global-set-key (kbd "s-]") 'text-scale-increase)
+
+(setq echo-keystrokes 0.1)
+
+(setq use-dialog-box nil)
+
+(setq
+ org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
+ org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files '("/Users/luminglv/org"))
+(setq org-agenda-use-time-grid t)
+
+(add-hook 'calendar-mode-hook
+	  (lambda()
+	    (local-set-key (kbd "C-{") 'calendar-backward-day)
+	    (local-set-key (kbd "C-}") 'calendar-forward-day)))
+
+(require 'cal-china-x)
+(setq mark-holidays-in-calendar t)
+
+(global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-s-<down>") 'shrink-window)
+(global-set-key (kbd "C-s-<up>") 'enlarge-window)
