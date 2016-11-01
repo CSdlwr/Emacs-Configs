@@ -6,8 +6,9 @@
 
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/")
-	     '("marmalade" . "http://marmalade-repo.org/packages"))
+	     ;; '("melpa" . "http://melpa.org/packages/")
+	     ;; '("marmalade" . "http://marmalade-repo.org/packages")
+	     '("popkit" . "https://elpa.popkit.org/packages/"))
 (package-initialize)
 
 
@@ -224,3 +225,5 @@
 (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-s-<down>") 'shrink-window)
 (global-set-key (kbd "C-s-<up>") 'enlarge-window)
+
+(setq scroll-step 1)
