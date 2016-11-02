@@ -1,8 +1,6 @@
 
-
 (setq user-full-name "luming.lv"
       user-mail-address "Lv.luming0858@gmail.com")
-
 
 (require 'package)
 (add-to-list 'package-archives
@@ -10,7 +8,6 @@
 	     ;; '("marmalade" . "http://marmalade-repo.org/packages")
 	     '("popkit" . "https://elpa.popkit.org/packages/"))
 (package-initialize)
-
 
 (setq initial-frame-alist
       '((width . 179)
@@ -113,10 +110,11 @@
 
 (defun my:ac-c-header-init()
   (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers))
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include"))
 
-;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
-;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (defun my:flymake-google-init()
   (require 'flymake-google-cpplint)
@@ -227,3 +225,21 @@
 (global-set-key (kbd "C-s-<up>") 'enlarge-window)
 
 (setq scroll-step 1)
+
+;; (semantic-mode 1)
+
+;; (defun my:add-semantic-to-autocomplete()
+  ;; (add-to-list 'ac-sources 'ac-source-semantic))
+
+;; (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+
+(setq org-log-done 'time)
+
+(setq org-agenda-span 15)
+
+(defun my:org-agenda-init-evil-normal-state()
+  (evil-normal-state)
+  (when (evil-emacs-state-p)
+      (evil-normal-state)))
+
+(add-hook 'org-finalize-agenda-hook 'my:org-agenda-init-evil-normal-state)
