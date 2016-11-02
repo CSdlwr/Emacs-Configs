@@ -203,12 +203,15 @@
 
 (setq use-dialog-box nil)
 
+(setq my:task-org-dir "/Users/luminglv/org")
+(setq my:task-org-file "/Users/luminglv/org/tasks.org")
+
 (setq
  org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
  org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-(setq org-agenda-files '("/Users/luminglv/org"))
+(setq org-agenda-files (list my:task-org-dir))
 (setq org-agenda-use-time-grid t)
 
 (add-hook 'calendar-mode-hook
@@ -246,3 +249,9 @@
 
 (setq org-tag-alist '(("qunar" . ?q)
 		      ("personal" . ?p)))
+
+(defun my:task-org-file-go-to-last-line()
+  (when (string= (buffer-file-name) my:task-org-file)
+    (evil-goto-line)))
+
+(add-hook 'find-file-hook 'my:task-org-file-go-to-last-line)
