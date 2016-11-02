@@ -234,12 +234,15 @@
 ;; (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
 
 (setq org-log-done 'time)
+(setq org-log-done 'note)
 
 (setq org-agenda-span 15)
 
 (defun my:org-agenda-init-evil-normal-state()
-  (evil-normal-state)
-  (when (evil-emacs-state-p)
+  (when (not (evil-normal-state-p))
       (evil-normal-state)))
 
 (add-hook 'org-finalize-agenda-hook 'my:org-agenda-init-evil-normal-state)
+
+(setq org-tag-alist '(("qunar" . ?q)
+		      ("personal" . ?p)))
