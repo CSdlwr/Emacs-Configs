@@ -255,3 +255,8 @@
     (evil-goto-line)))
 
 (add-hook 'find-file-hook 'my:task-org-file-go-to-last-line)
+
+(defun my:org-agenda-ret-swith-to()
+  (local-set-key (kbd "<return>") 'org-agenda-switch-to))
+
+(add-hook 'org-finalize-agenda-hook 'my:org-agenda-ret-swith-to)
