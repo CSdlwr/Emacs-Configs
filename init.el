@@ -278,7 +278,7 @@
 
 (defun my:jekyll-org-dir-open(file-name)
     "open a jekyll-org file by name directly, create if not exists."
-  (interactive "sWhich file to you want to open?")
+  (interactive "sWhich file to you want to open:")
   (let ((jekyll-formatted-file-name
 	(format "%s_%s.org" (format-time-string "%Y-%m-%d") file-name)))
     (unless (file-exists-p (concat my:jekyll-org-files-dir jekyll-formatted-file-name))
@@ -289,3 +289,8 @@
   "find file in my:jekyll-org-files-dir directly"
   (interactive)
   (ido-find-file-in-dir my:jekyll-org-files-dir))
+
+(defun my:misc-org-dir-find()
+  "find file in ~/Files/llm/markdown dir directly"
+  (interactive)
+  (ido-find-file-in-dir "~/Files/llm/markdown_note"))
