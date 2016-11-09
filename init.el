@@ -5,13 +5,13 @@
 (require 'package)
 (add-to-list 'package-archives
 	     ;; '("melpa" . "http://melpa.org/packages/")
-	     ;; '("marmalade" . "http://marmalade-repo.org/packages")
+	     ;; '("marmalade" . "http://marmalade-repo.org/packages"))
 	     '("popkit" . "https://elpa.popkit.org/packages/"))
 (package-initialize)
 
 (setq initial-frame-alist
       '((width . 179)
-        (height . 46)))
+        (height . 49)))
 
 (require 'evil)
 (evil-mode 1)
@@ -104,14 +104,14 @@
 (show-paren-mode t)
 (electric-pair-mode 1)
 
-(add-to-list 'default-frame-alist '(font . "Monaco-12"))
+(add-to-list 'default-frame-alist '(font . "Monaco-11"))
 
 (setq ns-pop-up-frames nil)
 
 (defun my:ac-c-header-init()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include"))
+  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"))
 
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
@@ -191,8 +191,8 @@
     (?o delete-other-windows))
 "List of actions for `aw-dispatch-default'.")
 
-(setq tab-width 4
-      indent-tabs-mode nil)
+(setq tab-width 4)
+(setq indent-tabs-mode nil)
 
 (setq make-backup-files nil)
 
@@ -206,9 +206,8 @@
 (setq my:task-org-dir "/Users/luminglv/org")
 (setq my:task-org-file "/Users/luminglv/org/tasks.org")
 
-(setq
- org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
- org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+(setq org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE")))
+(setq org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files (list my:task-org-dir))
@@ -231,8 +230,8 @@
 
 ;; (semantic-mode 1)
 
-;; (defun my:add-semantic-to-autocomplete()
-  ;; (add-to-list 'ac-sources 'ac-source-semantic))
+(defun my:add-semantic-to-autocomplete()
+  (add-to-list 'ac-sources 'ac-source-semantic))
 
 ;; (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
 
@@ -260,3 +259,30 @@
   (local-set-key (kbd "<return>") 'org-agenda-switch-to))
 
 (add-hook 'org-finalize-agenda-hook 'my:org-agenda-ret-swith-to)
+
+(require 'irony)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode-hook)
+
+(defun my:irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my:irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(defvar my:jekyll-org-files-dir "~/org/jekyll/"
+  "org files dir for jekyll posts")
+
+(defun my:open-jekyll-org-file(file-name)
+    "open a jekyll-org file, create in a particular dir if not exists."
+  (interactive "sWhich file to you want to open?")
+  (let
+      ((jekyll-formatted-file-name
+	(format "%s_%s.org" (format-time-string "%Y-%m-%d") file-name)))
+    (unless (file-exists-p (concat my:jekyll-org-files-dir jekyll-formatted-file-name))
+      (switch-to-buffer (get-buffer-create jekyll-formatted-file-name))
+      (write-file (concat my:jekyll-org-files-dir jekyll-formatted-file-name)))
+    ))
