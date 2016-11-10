@@ -296,3 +296,11 @@
   "find file in ~/Files/llm/markdown dir directly"
   (interactive)
   (ido-find-file-in-dir "~/Files/llm/markdown_note"))
+
+(setq org-default-notes-file my:task-org-file)
+
+(define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("t" "todo" entry (file my:task-org-file)
+	 "\n* TODO %?\n")))
