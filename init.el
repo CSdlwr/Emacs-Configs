@@ -279,7 +279,7 @@
 (defun my:jekyll-org-dir-open(file-name)
     "open a jekyll-org file by name directly, create if not exists."
   (interactive "sWhich file to you want to open:")
-  (let* ((jekyll-formatted-file-name (format "%s_%s.org" (format-time-string "%Y-%m-%d") file-name))
+  (let* ((jekyll-formatted-file-name (format "%s-%s.org" (format-time-string "%Y-%m-%d") file-name))
 	 (jekyll-formatted-file-path (concat my:jekyll-org-files-dir jekyll-formatted-file-name)))
     (if (file-exists-p jekyll-formatted-file-path)
 	(find-file jekyll-formatted-file-path)
