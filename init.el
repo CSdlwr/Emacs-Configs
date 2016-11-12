@@ -307,4 +307,4 @@
 
 (add-hook 'org-mode-hook
 	  (lambda()
-	    (local-set-key (kbd "C-c C-o" 'org-open-at-point))))
+	    (local-set-key (kbd "C-c C-o") 'org-open-at-point)))
