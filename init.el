@@ -303,7 +303,7 @@
 
 (setq org-capture-templates
       '(("t" "todo" entry (file my:task-org-file)
-	 "\n* TODO %?\n")))
+	 "* TODO %?  %^G\n  SCHEDULED: %^t\n" :empty-lines-before 1)))
 
 (add-hook 'org-mode-hook
 	  (lambda()
