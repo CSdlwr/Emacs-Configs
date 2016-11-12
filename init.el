@@ -304,3 +304,7 @@
 (setq org-capture-templates
       '(("t" "todo" entry (file my:task-org-file)
 	 "\n* TODO %?\n")))
+
+(add-hook 'org-mode-hook
+	  (lambda()
+	    (local-set-key (kbd "C-c C-o" 'org-open-at-point))))
