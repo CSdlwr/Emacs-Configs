@@ -206,7 +206,7 @@
 (setq my:task-org-dir "/Users/luminglv/org")
 (setq my:task-org-file "/Users/luminglv/org/tasks.org")
 
-(setq org-todo-keywords '((sequence "TODO" "INPROGRESS(!)" "DONE(@)")))
+(setq org-todo-keywords '((sequence "TODO(!)" "INPROGRESS(!)" "DONE(@)")))
 (setq org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
