@@ -247,7 +247,8 @@
 (add-hook 'org-finalize-agenda-hook 'my:org-agenda-init-evil-normal-state)
 
 (setq org-tag-alist '(("qunar" . ?q)
-		      ("personal" . ?p)))
+		      ("personal" . ?p)
+		      ("habit" . ?h)))
 
 (defun my:task-org-file-go-to-last-line()
   (when (string= (buffer-file-name) my:task-org-file)
@@ -308,3 +309,8 @@
 (add-hook 'org-mode-hook
 	  (lambda()
 	    (local-set-key (kbd "C-c C-o") 'org-open-at-point)))
+
+(require 'org-habit)
+(add-to-list 'org-modules "org-habit")
+(setq org-habit-show-habits-only-for-today t)
+(setq org-habit-graph-column 30)
