@@ -320,3 +320,9 @@
 (setq org-agenda-tags-column 80)
 
 (elpy-enable)
+
+(add-hook 'elpy-mode-hook
+	  (lambda()
+	    (define-key elpy-mode-map (kbd "M-.") nil)
+	    (local-set-key (kbd "s-b") 'elpy-goto-definition)
+	    (local-set-key (kbd "M-.") 'elpy-company-backend)))
