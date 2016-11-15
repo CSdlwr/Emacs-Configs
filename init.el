@@ -313,6 +313,8 @@
 (require 'org-habit)
 (add-to-list 'org-modules "org-habit")
 (setq org-habit-show-habits-only-for-today t)
-(setq org-habit-graph-column 50)
+(setq org-habit-graph-column 40)
 
 (setq org-log-into-drawer t)
+
+(setq org-agenda-tags-column 80)
