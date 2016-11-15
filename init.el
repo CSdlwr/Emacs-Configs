@@ -318,3 +318,5 @@
 (setq org-log-into-drawer t)
 
 (setq org-agenda-tags-column 80)
+
+(elpy-enable)
