@@ -206,8 +206,9 @@
 (setq my:task-org-dir "/Users/luminglv/org")
 (setq my:task-org-file "/Users/luminglv/org/tasks.org")
 
-(setq org-todo-keywords '((sequence "TODO(!)" "INPROGRESS(!)" "DONE(@)")))
-(setq org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
+(setq org-todo-keywords '((sequence "TODO(t!)" "INPROGRESS(p!)" "WAITING(w@)" "DONE(d@)")))
+(setq org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))
+			       ("WAITING". (:foreground "dark goldenrod"))))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files (list my:task-org-dir))
