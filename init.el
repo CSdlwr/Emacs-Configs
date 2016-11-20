@@ -63,7 +63,16 @@
 ;(require 'color-theme)
 ;(color-theme-initialize)
 ;(color-theme-classic)
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
+(when window-system
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-height-minus-1 1)
+  (setq solarized-height-plus-1 1)
+  (setq solarized-height-plus-2 1)
+  (setq solarized-height-plus-3 1)
+  (setq solarized-height-plus-4 1)
+  (load-theme 'solarized-dark t))
 
 (menu-bar-mode -1)
 
