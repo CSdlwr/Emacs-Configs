@@ -333,3 +333,14 @@
 
 (add-hook 'org-agenda-finalize-hook
 	  (lambda() (delete-other-windows)))
+
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+
+(setq org-mobile-inbox-for-pull "~/org/from-mobile.org")
+
+(add-hook 'after-save-hook
+	  (lambda()
+	    (when (string= buffer-file-name my:task-org-file)
+	      (org-mobile-push))))
+
+(add-hook 'after-init-hook 'org-mobile-pull)
