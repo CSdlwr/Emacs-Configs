@@ -1,6 +1,6 @@
 
-(setq user-full-name "luming.lv"
-      user-mail-address "Lv.luming0858@gmail.com")
+(setq user-full-name "luming.lv")
+(setq user-mail-address "Lv.luming0858@gmail.com")
 
 (require 'package)
 (add-to-list 'package-archives
@@ -9,9 +9,7 @@
 	     '("popkit" . "https://elpa.popkit.org/packages/"))
 (package-initialize)
 
-(setq initial-frame-alist
-      '((width . 179)
-        (height . 49)))
+(setq initial-frame-alist '((width . 179) (height . 49)))
 
 (require 'evil)
 (evil-mode 1)
@@ -103,6 +101,7 @@
 
 (show-paren-mode t)
 (electric-pair-mode 1)
+(add-to-list 'electric-pair-pairs '(?\{ . ?\}))
 
 (add-to-list 'default-frame-alist '(font . "Monaco-11"))
 
