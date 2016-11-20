@@ -330,3 +330,6 @@
 	    (local-set-key (kbd "M-.") 'elpy-company-backend)))
 
 (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+
+(add-hook 'org-agenda-finalize-hook
+	  (lambda() (delete-other-windows)))
