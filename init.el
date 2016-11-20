@@ -26,7 +26,7 @@
 	  (lambda()
 	    (org-bullets-mode t)))
 (setq org-hide-leading-stars t)
-;; (setq org-ellipsis "⤵")
+(setq org-ellipsis "⤵")
 
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'color-theme-sanityinc-solarized-dark)
