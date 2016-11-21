@@ -354,3 +354,5 @@
 	      (org-mobile-push))))
 
 (add-hook 'after-init-hook 'org-mobile-pull)
+
+(setq org-src-fontify-natively t)
