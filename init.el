@@ -66,6 +66,7 @@
 ;(color-theme-classic)
 ;; (load-theme 'zenburn t)
 (when window-system
+  (setq solarized-distinct-fringe-background t)
   (setq solarized-use-variable-pitch nil)
   (setq solarized-high-contrast-mode-line t)
   (setq solarized-height-minus-1 1)
