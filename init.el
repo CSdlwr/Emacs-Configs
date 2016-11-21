@@ -357,3 +357,11 @@
 (add-hook 'after-init-hook 'org-mobile-pull)
 
 (setq org-src-fontify-natively t)
+
+(global-flycheck-mode)
+
+(exec-path-from-shell-initialize)
+
+(provide 'init)
+;;; init.el ends here
+
