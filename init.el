@@ -261,7 +261,8 @@
 
 (setq org-tag-alist '(("qunar" . ?q)
 		      ("personal" . ?p)
-		      ("habit" . ?h)))
+		      ("habit" . ?h)
+		      ("learning" . ?l)))
 
 (defun my:task-org-file-go-to-last-line()
   (when (string= (buffer-file-name) my:task-org-file)
