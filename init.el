@@ -363,6 +363,8 @@
 
 (exec-path-from-shell-initialize)
 
+(setq org-reveal-root "file:///Users/luminglv/reveal-js/reveal.js-3.3.0")
+
 (provide 'init)
 ;;; init.el ends here
 
