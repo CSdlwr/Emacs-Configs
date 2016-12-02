@@ -1,3 +1,6 @@
+;;; package --- summary
+;;; code:
+;;; commentary:
 
 (setq user-full-name "luming.lv")
 (setq user-mail-address "Lv.luming0858@gmail.com")
@@ -19,12 +22,14 @@
 ;; turn on soft wrapping mode for org mode
 (add-hook 'org-mode-hook 'my:org-mode-truncate-lines)
 (defun my:org-mode-truncate-lines ()
+  "Truncate lines in org mode."
   (setq truncate-lines nil))
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook
 	  (lambda()
 	    (org-bullets-mode t)))
+
 (setq org-hide-leading-stars t)
 (setq org-ellipsis "⤵")
 
@@ -42,7 +47,8 @@
 ;;; C-c as general purpose escape key sequence.
 ;;;
 (defun my:esc (prompt)
-     "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
+     "Functionality for escaping generally. 
+Includes exiting Evil insert state and C-g binding.  PROMPT."
      (cond
       ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
       ;; Key Lookup will use it.
@@ -278,9 +284,10 @@
 (require 'irony)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode-hook)
+(add-hook 'objc-mode-hook 'irony-mode)
 
 (defun my:irony-mode-hook ()
+  "Irony Mode Hook."
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
@@ -289,7 +296,7 @@
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 (defvar my:jekyll-org-files-dir "~/org/jekyll/"
-  "org files dir for jekyll posts")
+  "Org Files Dir for Jekyll Posts.")
 
 (defun my:jekyll-org-dir-open(file-name)
     "open a jekyll-org file by name directly, create if not exists."
@@ -370,6 +377,14 @@
 (remove-hook 'elpy-modules 'elpy-module-flymake)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq company-show-numbers t)
+(setq company-idle-delay nil)
 
 (provide 'init)
 ;;; init.el ends here
