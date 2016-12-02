@@ -36,9 +36,9 @@
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'color-theme-sanityinc-solarized-dark)
 
-;; (require 'auto-complete)
-;; (require 'auto-complete-config)
-;; (ac-config-default)
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -382,9 +382,14 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
   '(add-to-list 'company-backends 'company-irony))
 
 (add-hook 'after-init-hook 'global-company-mode)
+(global-company-mode)
 
 (setq company-show-numbers t)
 (setq company-idle-delay nil)
+(setq company-minimum-prefix-length 2)
+(global-set-key (kbd "C-.") 'company-complete)
+;; (add-to-list 'company-backends 'company-yasnippet)
+(global-set-key (kbd "C-c y") 'company-yasnippet)
 
 (provide 'init)
 ;;; init.el ends here
