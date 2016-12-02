@@ -365,6 +365,12 @@
 
 (setq org-reveal-root "file:///Users/luminglv/reveal-js/reveal.js-3.3.0")
 
+(setq-default flycheck-flake8-maximum-line-length 120)
+
+(remove-hook 'elpy-modules 'elpy-module-flymake)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (provide 'init)
 ;;; init.el ends here
 
