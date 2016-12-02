@@ -36,9 +36,9 @@
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'color-theme-sanityinc-solarized-dark)
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+;; (require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -125,13 +125,13 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (setq ns-pop-up-frames nil)
 
-(defun my:ac-c-header-init()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"))
+;; (defun my:ac-c-header-init()
+  ;; (require 'auto-complete-c-headers)
+  ;; (add-to-list 'ac-sources 'ac-source-c-headers)
+  ;; (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"))
 
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (defun my:flymake-google-init()
   (require 'flymake-google-cpplint)
@@ -249,8 +249,8 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 ;; (semantic-mode 1)
 
-(defun my:add-semantic-to-autocomplete()
-  (add-to-list 'ac-sources 'ac-source-semantic))
+;; (defun my:add-semantic-to-autocomplete()
+  ;; (add-to-list 'ac-sources 'ac-source-semantic))
 
 ;; (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
 
