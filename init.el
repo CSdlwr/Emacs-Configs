@@ -378,18 +378,20 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(require 'company-irony)
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
 (add-hook 'after-init-hook 'global-company-mode)
 (global-company-mode)
+(setq company-backends (remove 'company-semantic company-backends))
 
 (setq company-show-numbers t)
-(setq company-idle-delay nil)
+(setq company-idle-delay t)
 (setq company-minimum-prefix-length 2)
 (global-set-key (kbd "C-.") 'company-complete)
-;; (add-to-list 'company-backends 'company-yasnippet)
-(global-set-key (kbd "C-c y") 'company-yasnippet)
+
+;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 (provide 'init)
 ;;; init.el ends here
