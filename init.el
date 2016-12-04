@@ -133,18 +133,9 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 ;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 ;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
-(defun my:flymake-google-init()
-  (require 'flymake-google-cpplint)
-  (custom-set-variables
-   '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
-  (flymake-google-cpplint-load))
-
-;; (add-hook 'c++-mode-hook 'my:flymake-google-init)
-;; (add-hook 'c-mode-hook 'my:flymake-google-init)
-
-;; (require 'google-c-style)
-;; (add-hook 'c-mode-common-hook 'google-set-c-style)
-;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 
 (add-to-list 'load-path "~/.emacs.d/auto-java-complete")
@@ -392,6 +383,14 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 (global-set-key (kbd "C-.") 'company-complete)
 
 ;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(setq flycheck-c/c++-googlelint-executable "/usr/local/bin/cpplint")
+
+(eval-after-load 'flycheck
+  '(progn
+     (require 'flycheck-google-cpplint)
+     (flycheck-add-next-checker 'c/c++-clang
+				'(warning . c/c++-googlelint))))
 
 (provide 'init)
 ;;; init.el ends here
