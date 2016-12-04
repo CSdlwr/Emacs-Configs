@@ -125,13 +125,6 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (setq ns-pop-up-frames nil)
 
-;; (defun my:ac-c-header-init()
-  ;; (require 'auto-complete-c-headers)
-  ;; (add-to-list 'ac-sources 'ac-source-c-headers)
-  ;; (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include"))
-
-;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
-;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -371,7 +364,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (require 'company-irony)
 (eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
+  '(add-to-list 'company-backends '(company-irony-c-headers company-irony)))
 
 (add-hook 'after-init-hook 'global-company-mode)
 (global-company-mode)
