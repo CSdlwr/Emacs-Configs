@@ -21,14 +21,12 @@
 
 ;; turn on soft wrapping mode for org mode
 (add-hook 'org-mode-hook 'my:org-mode-truncate-lines)
-(defun my:org-mode-truncate-lines ()
+(defun my:org-mode-truncate-lines()
   "Truncate lines in org mode."
   (setq truncate-lines nil))
 
 (require 'org-bullets)
-(add-hook 'org-mode-hook
-	  (lambda()
-	    (org-bullets-mode t)))
+(add-hook 'org-mode-hook (lambda() (org-bullets-mode t)))
 
 (setq org-hide-leading-stars t)
 (setq org-ellipsis "⤵")
@@ -46,7 +44,7 @@
 
 ;;; C-c as general purpose escape key sequence.
 ;;;
-(defun my:esc (prompt)
+(defun my:esc(prompt)
      "Functionality for escaping generally. 
 Includes exiting Evil insert state and C-g binding.  PROMPT."
      (cond
@@ -270,7 +268,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
 
-(defun my:irony-mode-hook ()
+(defun my:irony-mode-hook()
   "Irony Mode Hook."
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
@@ -384,6 +382,16 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
      (require 'flycheck-google-cpplint)
      (flycheck-add-next-checker 'c/c++-clang
 				'(warning . c/c++-googlelint))))
+
+(defun my:org-todo-state-change-update-lastmod()
+  (org-entry-put
+   (point)
+   "LAST_MOD"
+   (format-time-string "%Y-%m-%d %H:%M:%S")))
+
+(add-hook 'org-after-todo-state-change-hook
+	  'my:org-todo-state-change-update-lastmod)
+
 
 (provide 'init)
 ;;; init.el ends here
