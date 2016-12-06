@@ -383,11 +383,14 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
      (flycheck-add-next-checker 'c/c++-clang
 				'(warning . c/c++-googlelint))))
 
+(setq my:last-mod-key "LAST_MOD")
+(setq my:date-time-string-format "%Y-%m-%d %H:%M:%S")
+
 (defun my:org-todo-state-change-update-lastmod()
   (org-entry-put
    (point)
-   "LAST_MOD"
-   (format-time-string "%Y-%m-%d %H:%M:%S")))
+   my:last-mod-key
+   (format-time-string my:date-time-string-format)))
 
 (add-hook 'org-after-todo-state-change-hook
 	  'my:org-todo-state-change-update-lastmod)
