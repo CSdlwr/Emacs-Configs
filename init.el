@@ -274,6 +274,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
     'irony-completion-at-point-async))
+
 (add-hook 'irony-mode-hook 'my:irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
@@ -399,24 +400,31 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 (setq org-archive-location "~/org/archive.org::")
 
 (defun my:auto-archive-tasks()
+  "archive todo entries in my:task-org-file automatically.
+   these conditions should be meet: 
+   1. todo type is done 
+   2. last_mod time is 15 days ago from current-time"
+
   (interactive)
   (when (string= (buffer-file-name) my:task-org-file)
     (let ((tree (org-element-parse-buffer 'headline)))
-    (org-element-map tree 'headline
-      (lambda(hl)
-	(when (and (org-element-property :LAST_MOD hl)
-		   (string= (org-element-property :todo-type hl) "done")
-		   (t)
-		   (or (string= (org-element-property :title hl) "task1")
-		       (string= (org-element-property :title hl) "task2")
-		       (string= (org-element-property :title hl) "task4")))
-
-	  (let* ((entry-id (org-element-property :ID hl))
-		 (entry-point (cdr (org-id-find entry-id))))
-	    (print entry-id)
-	    (print entry-point)
-	    (goto-char entry-point)
-	    (org-archive-subtree))))))))
+      (org-element-map tree 'headline
+	(lambda(hl)
+	  (let* ((entry-last-mod (org-element-property :LAST_MOD hl))
+		(entry-todo-type (org-element-property :todo-type hl))
+		(entry-id (org-element-property :ID hl))
+		(entry-point (cdr (org-id-find-id-in-file entry-id my:task-org-file)))
+		(entry-title (org-element-property :title hl)))
+	    (when (and entry-last-mod
+		       (string= entry-todo-type "done")
+		       (time-less-p (date-to-time entry-last-mod)
+				    (time-subtract (current-time) (days-to-time 15))))
+	      (print entry-id)
+	      (print entry-point)
+	      (print entry-title)
+	      (goto-char entry-point)
+	      (org-archive-subtree)))))
+      (save-buffer))))
 
 
 (defun my:auto-add-id-to-task-entries()
@@ -426,7 +434,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 
 (add-hook 'find-file-hook 'my:auto-add-id-to-task-entries)
-;; (add-hook 'find-file-hook 'my:auto-archive-tasks)
+(add-hook 'find-file-hook 'my:auto-archive-tasks)
 
 (require 'org-id)
 
@@ -435,6 +443,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 	    (org-set-property
 	     my:last-mod-key
 	     (format-time-string my:date-time-string-format))))
+
 
 (provide 'init)
 ;;; init.el ends here
