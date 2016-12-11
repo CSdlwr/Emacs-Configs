@@ -399,6 +399,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (setq org-archive-location "~/org/archive.org::")
 
+
 (defun my:auto-archive-tasks()
   "archive todo entries in my:task-org-file automatically.
    these conditions should be meet: 
@@ -406,7 +407,6 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
    2. last_mod time is 15 days ago from current-time"
 
   (interactive)
-  ;; (when (string= (buffer-file-name) my:task-org-file)
 
   (save-current-buffer 
     (find-file my:task-org-file)
@@ -418,6 +418,7 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 		(entry-id (org-element-property :ID hl))
 		(entry-point (cdr (org-id-find-id-in-file entry-id my:task-org-file)))
 		(entry-title (org-element-property :title hl)))
+
 	    (when (and entry-last-mod
 		       (string= entry-todo-type "done")
 		       (time-less-p (date-to-time entry-last-mod)
@@ -447,6 +448,13 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 	    (org-set-property
 	     my:last-mod-key
 	     (format-time-string my:date-time-string-format))))
+
+
+(require 'highlight-indent-guides)
+
+(setq highlight-indent-guides-method 'character)
+
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 
 (provide 'init)
