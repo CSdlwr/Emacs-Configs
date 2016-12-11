@@ -430,6 +430,11 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (require 'org-id)
 
+(add-hook 'org-capture-before-finalize-hook
+	  (lambda()
+	    (org-set-property
+	     my:last-mod-key
+	     (format-time-string my:date-time-string-format))))
 
 (provide 'init)
 ;;; init.el ends here
