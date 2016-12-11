@@ -396,6 +396,41 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 	  'my:org-todo-state-change-update-lastmod)
 
 
+(setq org-archive-location "~/org/archive.org::")
+
+(defun my:auto-archive-tasks()
+  (interactive)
+  (when (string= (buffer-file-name) my:task-org-file)
+    (let ((tree (org-element-parse-buffer 'headline)))
+    (org-element-map tree 'headline
+      (lambda(hl)
+	(when (and (org-element-property :LAST_MOD hl)
+		   (string= (org-element-property :todo-type hl) "done")
+		   (t)
+		   (or (string= (org-element-property :title hl) "task1")
+		       (string= (org-element-property :title hl) "task2")
+		       (string= (org-element-property :title hl) "task4")))
+
+	  (let* ((entry-id (org-element-property :ID hl))
+		 (entry-point (cdr (org-id-find entry-id))))
+	    (print entry-id)
+	    (print entry-point)
+	    (goto-char entry-point)
+	    (org-archive-subtree))))))))
+
+
+(defun my:auto-add-id-to-task-entries()
+  (when (string= (buffer-file-name) my:task-org-file)
+    (org-map-entries 'org-id-get-create)
+    (save-buffer)))
+
+
+(add-hook 'find-file-hook 'my:auto-add-id-to-task-entries)
+;; (add-hook 'find-file-hook 'my:auto-archive-tasks)
+
+(require 'org-id)
+
+
 (provide 'init)
 ;;; init.el ends here
 
