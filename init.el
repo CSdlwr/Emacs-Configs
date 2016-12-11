@@ -406,7 +406,10 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
    2. last_mod time is 15 days ago from current-time"
 
   (interactive)
-  (when (string= (buffer-file-name) my:task-org-file)
+  ;; (when (string= (buffer-file-name) my:task-org-file)
+
+  (save-current-buffer 
+    (find-file my:task-org-file)
     (let ((tree (org-element-parse-buffer 'headline)))
       (org-element-map tree 'headline
 	(lambda(hl)
@@ -434,7 +437,8 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 
 (add-hook 'find-file-hook 'my:auto-add-id-to-task-entries)
-(add-hook 'find-file-hook 'my:auto-archive-tasks)
+(add-hook 'after-init-hook 'my:auto-archive-tasks)
+;; (add-hook 'find-file-hook 'my:auto-archive-tasks)
 
 (require 'org-id)
 
