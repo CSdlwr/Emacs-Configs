@@ -46,7 +46,7 @@
 ;;;
 (defun my:esc(prompt)
      "Functionality for escaping generally. 
-Includes exiting Evil insert state and C-g binding.  PROMPT."
+      Includes exiting Evil insert state and C-g binding.  PROMPT."
      (cond
       ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
       ;; Key Lookup will use it.
@@ -69,16 +69,17 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 ;(color-theme-initialize)
 ;(color-theme-classic)
 ;; (load-theme 'zenburn t)
-(when window-system
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-use-variable-pitch nil)
-  (setq solarized-high-contrast-mode-line t)
-  (setq solarized-height-minus-1 1)
-  (setq solarized-height-plus-1 1)
-  (setq solarized-height-plus-2 1)
-  (setq solarized-height-plus-3 1)
-  (setq solarized-height-plus-4 1)
-  (load-theme 'solarized-dark t))
+(if window-system
+    (progn (setq solarized-distinct-fringe-background t)
+	   (setq solarized-use-variable-pitch nil)
+	   (setq solarized-high-contrast-mode-line t)
+	   (setq solarized-height-minus-1 1)
+	   (setq solarized-height-plus-1 1)
+	   (setq solarized-height-plus-2 1)
+	   (setq solarized-height-plus-3 1)
+	   (setq solarized-height-plus-4 1)
+	   (load-theme 'solarized-dark t))
+  (load-theme 'monokai t))
 
 (menu-bar-mode -1)
 
@@ -439,7 +440,6 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (add-hook 'find-file-hook 'my:auto-add-id-to-task-entries)
 (add-hook 'after-init-hook 'my:auto-archive-tasks)
-;; (add-hook 'find-file-hook 'my:auto-archive-tasks)
 
 (require 'org-id)
 
@@ -459,4 +459,3 @@ Includes exiting Evil insert state and C-g binding.  PROMPT."
 
 (provide 'init)
 ;;; init.el ends here
-
